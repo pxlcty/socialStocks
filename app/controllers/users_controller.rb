@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def my_portfolio
+    @user = current_user
     @tracked_stocks = current_user.stocks
   end
 
@@ -7,9 +8,10 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
 
-  # def search
-  #   render json: params[:friend]
-  # end
+  def show
+    @user = User.find(params[:id])
+    @tracked_stocks = @user.stocks
+  end
 
   def search
     if params[:friend].present?

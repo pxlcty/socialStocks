@@ -10,9 +10,14 @@
             <tr>
               <td><strong>Name: </strong><%= friend.full_name %></td>
               <td><strong>Email: </strong><%= friend.email %></td>
-              <td><strong>Action: </strong><%= link_to "View Profile", '#', class: 'btn btn-sm btn-success' %>
-        <%= link_to 'Follow friend?', '#',
-                                        class: 'btn btn-sm btn-success', method: :post %></td>
+              <td><strong>Action: </strong><%= link_to "View Profile", user_path(friend), class: 'btn btn-sm btn-success' %>
+              <% if current_user.not_friends_with?(friend.id) %>
+        <%= link_to 'Follow friend?', friendships_path(friend: friend), class: 'btn btn-sm btn-success', method: :post %></td>
+              <% else %>
+                <span class="bad badge-secondary">
+                  You are friends
+                </span>
+              <% end %>
         </tr>
       <% end %>                                            
       </tbody>
